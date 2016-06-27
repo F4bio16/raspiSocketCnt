@@ -1,5 +1,4 @@
 var wpi = require('wiring-pi');
-// var app = require('express')();
 var express = require('express');
 app = express();
 var http = require('http').Server(app);
@@ -83,7 +82,7 @@ wpi.pinMode(pinRed, wpi.OUTPUT);
 
 app.get('/', function(req,res)
 {
-   res.sendFile("view/startbootstrap-bare-1.0.4/index.html", { root: __dirname} );
+   res.sendFile("view/index.html", { root: __dirname} );
 });
 
 io.on('connection', function(socket)
