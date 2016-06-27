@@ -1,0 +1,41 @@
+<html>
+   <head>
+      <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <style>
+	    #ledColor
+	    {
+		height: 50px;
+		width: 50px;
+		margin: 5px;
+		padding: 5px;
+		float: left;
+	    }
+      </style>
+   </head>
+   <body>
+	<button class="toggle">Toggle blink</button>
+	<button class="off">Spengi</button>
+	<div id="ledColor"></div>
+        <script>
+           var socket = io("http://f4bio16.asuscomm.com:3000");
+	   $('.toggle').on('click', function()
+	     {
+		socket.emit('toggle', 1);
+	     });
+	   $('.off').on('click', function()
+	     {
+		socket.emit('off', 1);
+	     });
+	   socket.on('ledStatus', function(msg)
+		{
+		   console.log(msg);
+		   $('#ledColor').css(
+			'background-color',
+			'rgb('+msg.led_info.red+','
+			+msg.led_info.green+','
+			+msg.led_info.blue+")");
+		});
+      </script>
+   </body>
+</html>
